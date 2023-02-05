@@ -7,18 +7,18 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class PaginatorComponent {
 
-  @Input() totalDePaginas: number = 0;
-  @Input() inicioDaPagina: number = 0;
-  @Input() totalNaPagina: number = 0;
-  @Input() totalDeProdutos: number = 0;
+  @Input() totalDePaginas: number;
+  @Input() inicioDaPagina: number;
+  @Input() totalNaPagina: number;
+  @Input() totalDeProdutos: number;
   @Output() mudouDePagina = new EventEmitter();
 
   paginaAtiva: number = 1;
 
   constructor() { }
 
-  createRange(number: any) {
-    return new Array(number).fill(0)
+  createRange(totalPages: number) {
+    return new Array(totalPages).fill(0)
       .map((n, index) => index + 1);
   }
 

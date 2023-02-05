@@ -1,3 +1,18 @@
+<div class="mb-6">
+  <form action="#">
+    <label for="items-por-pagina">
+      Mostrar
+      <select name="items-por-pagina" id="items-por-pagina" class="rounded w-30" (change)="alterarItensPorPagina($event)">
+        <option value="10">10</option>
+        <option value="25">25</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+      </select>
+      Produtos
+    </label>
+  </form>
+</div>
+
 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
   <div *ngFor="let product of listaPaginada" class="product shadow bg-white rounded">
     <div class="product-image">
