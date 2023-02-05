@@ -1,0 +1,19 @@
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+  <div *ngFor="let product of listaPaginada" class="product shadow bg-white rounded">
+    <div class="product-image">
+      <img src="{{ product.images[0] }}" class="object-cover h-48 w-full rounded" />
+    </div>
+    <div class="product-info p-2">
+      <div class="product-title text-lg font-semibold text-slate-700">{{ product.title }}</div>
+      <div class="product-price text-xl text-emerald-600 font-bold mb-1">{{ product.price | currency : 'BRL'}}
+      </div>
+      <div class="product-description text-sm text-slate-600">{{ product.description }}</div>
+    </div>
+  </div>
+</div>
+
+<app-paginator [totalDePaginas]="totalDePaginas"
+               [inicioDaPagina]="inicioDaPagina" 
+               [totalNaPagina]="totalNaPagina"
+               [totalDeProdutos]="totalDeProdutos" 
+               (mudouDePagina)="onMudouDePagina($event)"></app-paginator>
