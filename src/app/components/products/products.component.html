@@ -2,7 +2,7 @@
   <form action="#">
     <label for="items-por-pagina">
       Mostrar
-      <select name="items-por-pagina" id="items-por-pagina" class="rounded w-30" (change)="alterarItensPorPagina($event)">
+      <select name="items-por-pagina" id="items-por-pagina" class="rounded w-30" (change)="alteraQtdPorPagina($event)">
         <option value="10">10</option>
         <option value="25">25</option>
         <option value="50">50</option>
@@ -13,9 +13,9 @@
   </form>
 </div>
 
-<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-  <div *ngFor="let product of listaPaginada" class="product shadow bg-white rounded">
-    <div class="product-image">
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 mb-6">
+  <div *ngFor="let product of productList | paginate: config" class="product shadow bg-white rounded" id="{{ product.id }}">
+    <div class="product-image w-full">
       <img src="{{ product.images[0] }}" class="object-cover h-48 w-full rounded" />
     </div>
     <div class="product-info p-2">
@@ -27,8 +27,6 @@
   </div>
 </div>
 
-<app-paginator [totalDePaginas]="totalDePaginas"
-               [inicioDaPagina]="inicioDaPagina" 
-               [totalNaPagina]="totalNaPagina"
-               [totalDeProdutos]="totalDeProdutos" 
-               (mudouDePagina)="onMudouDePagina($event)"></app-paginator>
+<div class="flex justify-center">
+  <app-custom-paginator [config]="config"></app-custom-paginator>
+</div>
