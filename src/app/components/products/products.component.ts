@@ -11,6 +11,8 @@ import { Product } from 'src/app/interfaces/product';
 export class ProductsComponent implements OnInit {
 
   productList: Array<Product> = [];
+  requestComplete: boolean = false;
+  loadingSkeletonTime: number = 2500; // Tempo em milisegundos para finalizar a animação do esqueleto após a requisição
 
   config: PaginationInstance = {
     id: 'productPagination',
@@ -18,12 +20,19 @@ export class ProductsComponent implements OnInit {
     currentPage: 1
   };
 
+  skeletonRangeItems: Array<number> = [];
+
   constructor(private productsService: ProductsService) { }
 
   ngOnInit(): void {
+
+    this.skeletonRangeItems = Array.from(Array(this.config.itemsPerPage).keys());
+
     this.productsService.getProducts().subscribe((data: Product[]) => {
       this.productList = data;
-      this.productList
+      setTimeout(() => {
+        this.requestComplete = true;
+      }, this.loadingSkeletonTime);
     });
   }
 

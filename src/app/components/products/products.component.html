@@ -14,17 +14,32 @@
 </div>
 
 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 mb-6">
-  <div *ngFor="let product of productList | paginate: config" class="product shadow bg-white rounded" id="{{ product.id }}">
-    <div class="product-image w-full">
-      <img src="{{ product.images[0] }}" class="object-cover h-48 w-full rounded" />
-    </div>
-    <div class="product-info p-2">
-      <div class="product-title text-lg font-semibold text-slate-700">{{ product.title }}</div>
-      <div class="product-price text-xl text-emerald-600 font-bold mb-1">{{ product.price | currency : 'BRL'}}
+  <ng-container *ngIf="requestComplete else skeletonLoading">
+    <div *ngFor="let product of productList | paginate: config" class="product shadow bg-white rounded"
+      id="{{ product.id }}">
+      <div class="product-image w-full">
+        <img src="{{ product.images[0] }}" class="object-cover h-48 w-full rounded" />
       </div>
-      <div class="product-description text-sm text-slate-600">{{ product.description }}</div>
+      <div class="product-info p-2">
+        <div class="product-title text-lg font-semibold text-slate-700">{{ product.title }}</div>
+        <div class="product-price text-xl text-emerald-600 font-bold mb-1">{{ product.price | currency : 'BRL'}}
+        </div>
+        <div class="product-description text-sm text-slate-600">{{ product.description }}</div>
+      </div>
     </div>
-  </div>
+  </ng-container>
+  <ng-template #skeletonLoading>
+    <div *ngFor="let productSkeleton of skeletonRangeItems | paginate: config">
+      <div class="product shadow bg-white rounded">
+        <div class="product-image w-full bg-slate-200 rounded h-48 animate-pulse"></div>
+        <div class="product-info p-2 space-y-3 mt-2 animate-pulse">
+          <div class="product-title bg-slate-200 h-5 rounded "></div>
+          <div class="product-price bg-slate-200 mb-1 h-8 rounded "></div>
+          <div class="product-description bg-slate-200 h-14 rounded "></div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
 </div>
 
 <div class="flex justify-center">
